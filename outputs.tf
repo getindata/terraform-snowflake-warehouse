@@ -1,6 +1,4 @@
-# Example output from the module
-
-output "example_output" {
-  description = "Example output of the module"
-  value       = var.example_var
+output "warehouse" {
+  description = "Details of the warehouse"
+  value       = one(resource.snowflake_warehouse.this[*])
 }
