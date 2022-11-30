@@ -3,7 +3,7 @@
 <!--- Pick Cloud provider Badge -->
 <!---![Azure](https://img.shields.io/badge/azure-%230072C6.svg?style=for-the-badge&logo=microsoftazure&logoColor=white) -->
 <!---![Google Cloud](https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white) -->
-![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Snowflake](https://img.shields.io/badge/-SNOWFLAKE-249edc?style=for-the-badge&logo=snowflake&logoColor=white)
 ![Terraform](https://img.shields.io/badge/terraform-%235835CC.svg?style=for-the-badge&logo=terraform&logoColor=white)
 
 <!--- Replace repository name -->
@@ -55,8 +55,8 @@ _Additional information that should be made public, for ex. how to solve known i
 
 ## EXAMPLES
 
-* [Full example](examples/full-example)
-* [Minimal example](examples/minimal-example)
+* [Simple](examples/simple)
+* [Complete](examples/complete)
 
 <!-- BEGIN_TF_DOCS -->
 
