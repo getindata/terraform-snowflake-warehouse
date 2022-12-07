@@ -9,8 +9,8 @@ resource "snowflake_role" "this_dev" {
 }
 
 resource "snowflake_resource_monitor" "this" {
-  name  = "warehouse-rm"
-  quota = 20
+  name         = "warehouse-rm"
+  credit_quota = 20
 
   notify_triggers = [50, 100]
 

@@ -28,7 +28,7 @@ resource "snowflake_warehouse" "this" {
 module "snowflake_role" {
   for_each = local.roles
 
-  source  = "github.com/getindata/terraform-snowflake-role"
+  source  = "github.com/getindata/terraform-snowflake-role?ref=v1.0.0"
   context = module.this.context
   enabled = module.this.enabled && lookup(each.value, "enabled", true)
 
