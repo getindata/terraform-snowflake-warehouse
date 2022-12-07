@@ -1,3 +1,3 @@
-provider "null" {
+provider "snowflake" {
   # Configuration options
 }
