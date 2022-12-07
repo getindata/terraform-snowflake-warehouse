@@ -87,3 +87,9 @@ variable "roles" {
   type        = any
   default     = {}
 }
+
+variable "create_default_roles" {
+  description = "Whether the default roles should be created"
+  type        = bool
+  default     = false
+}

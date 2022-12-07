@@ -3,7 +3,7 @@ locals {
     lookup(module.this.descriptors, "snowflake-warehouse", module.this.id), "/__+/", ""
   ), "_")
 
-  default_roles = {
+  default_roles = var.create_default_roles ? {
     usage = {
       privileges = ["USAGE", "OPERATE"]
     }
@@ -16,7 +16,7 @@ locals {
     admin = {
       privileges = ["MODIFY", "MONITOR", "USAGE", "OPERATE"]
     }
-  }
+  } : {}
 
   roles = module.roles_deep_merge.merged
 }

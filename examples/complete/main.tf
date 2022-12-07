@@ -21,6 +21,17 @@ module "terraform_snowflake_warehouse" {
   source  = "../../"
   context = module.this.context
 
+  descriptor_formats = {
+    snowflake-role = {
+      labels = ["attributes", "name"]
+      format = "%v_%v"
+    }
+    snowflake-warehouse = {
+      labels = ["name"]
+      format = "%v"
+    }
+  }
+
   enabled = true
 
   name    = "full_warehouse"
@@ -43,6 +54,8 @@ module "terraform_snowflake_warehouse" {
   statement_queued_timeout_in_seconds = 600
 
   resource_monitor = snowflake_resource_monitor.this.name
+
+  create_default_roles = true
 
   roles = {
     admin = {
