@@ -1,3 +1,13 @@
+module "warehouse_label" {
+  source  = "cloudposse/label/null"
+  version = "0.25.0"
+  context = module.this.context
+
+  delimiter           = coalesce(module.this.context.delimiter, "_")
+  regex_replace_chars = coalesce(module.this.context.regex_replace_chars, "/[^_a-zA-Z0-9]/")
+  label_value_case    = coalesce(module.this.context.label_value_case, "upper")
+}
+
 resource "snowflake_warehouse" "this" {
   count = module.this.enabled ? 1 : 0
 
@@ -28,7 +38,9 @@ resource "snowflake_warehouse" "this" {
 module "snowflake_role" {
   for_each = local.roles
 
-  source  = "github.com/getindata/terraform-snowflake-role?ref=v1.0.0"
+  source  = "getindata/role/snowflake"
+  version = "1.0.3"
+
   context = module.this.context
   enabled = module.this.enabled && lookup(each.value, "enabled", true)
 
