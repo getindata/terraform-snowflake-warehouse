@@ -1,7 +1,7 @@
 locals {
-  name_from_descriptor = trim(replace(
-    lookup(module.this.descriptors, "snowflake-warehouse", module.this.id), "/__+/", ""
-  ), "_")
+  name_from_descriptor = module.warehouse_label.enabled ? trim(replace(
+    lookup(module.warehouse_label.descriptors, var.descriptor_name, module.warehouse_label.id), "/${module.warehouse_label.delimiter}${module.warehouse_label.delimiter}+/", module.warehouse_label.delimiter
+  ), module.warehouse_label.delimiter) : null
 
   default_roles = var.create_default_roles ? {
     usage = {

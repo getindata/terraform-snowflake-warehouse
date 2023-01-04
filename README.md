@@ -31,7 +31,7 @@ Terraform module for Snowflake Warehouse management
 
 ```terraform
 module "terraform_snowflake_warehouse" {
-  source  = "github.com/getindata/terraform-snowflake-warehouse"
+  source  = "getindata/warehouse/snowflake"
   context = module.this.context
 
   name    = "warehouse"
@@ -81,6 +81,7 @@ _Additional information that should be made public, for ex. how to solve known i
 | <a name="input_create_default_roles"></a> [create\_default\_roles](#input\_create\_default\_roles) | Whether the default roles should be created | `bool` | `false` | no |
 | <a name="input_delimiter"></a> [delimiter](#input\_delimiter) | Delimiter to be used between ID elements.<br>Defaults to `-` (hyphen). Set to `""` to use no delimiter at all. | `string` | `null` | no |
 | <a name="input_descriptor_formats"></a> [descriptor\_formats](#input\_descriptor\_formats) | Describe additional descriptors to be output in the `descriptors` output map.<br>Map of maps. Keys are names of descriptors. Values are maps of the form<br>`{<br>   format = string<br>   labels = list(string)<br>}`<br>(Type is `any` so the map values can later be enhanced to provide additional options.)<br>`format` is a Terraform format string to be passed to the `format()` function.<br>`labels` is a list of labels, in order, to pass to `format()` function.<br>Label values will be normalized before being passed to `format()` so they will be<br>identical to how they appear in `id`.<br>Default is `{}` (`descriptors` output will be empty). | `any` | `{}` | no |
+| <a name="input_descriptor_name"></a> [descriptor\_name](#input\_descriptor\_name) | Name of the descriptor used to form a resource name | `string` | `"snowflake-warehouse"` | no |
 | <a name="input_enable_query_acceleration"></a> [enable\_query\_acceleration](#input\_enable\_query\_acceleration) | Specifies whether to enable the query acceleration service for queries that rely on this warehouse for compute resources. | `bool` | `true` | no |
 | <a name="input_enabled"></a> [enabled](#input\_enabled) | Set to false to prevent the module from creating any resources | `bool` | `null` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | ID element. Usually used for region e.g. 'uw2', 'us-west-2', OR role 'prod', 'staging', 'dev', 'UAT' | `string` | `null` | no |
@@ -112,8 +113,9 @@ _Additional information that should be made public, for ex. how to solve known i
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_roles_deep_merge"></a> [roles\_deep\_merge](#module\_roles\_deep\_merge) | Invicton-Labs/deepmerge/null | 0.1.5 |
-| <a name="module_snowflake_role"></a> [snowflake\_role](#module\_snowflake\_role) | github.com/getindata/terraform-snowflake-role | v1.0.0 |
+| <a name="module_snowflake_role"></a> [snowflake\_role](#module\_snowflake\_role) | getindata/role/snowflake | 1.0.3 |
 | <a name="module_this"></a> [this](#module\_this) | cloudposse/label/null | 0.25.0 |
+| <a name="module_warehouse_label"></a> [warehouse\_label](#module\_warehouse\_label) | cloudposse/label/null | 0.25.0 |
 
 ## Outputs
 
