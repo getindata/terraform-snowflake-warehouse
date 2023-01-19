@@ -62,7 +62,7 @@ module "terraform_snowflake_warehouse" {
       granted_to_roles = [snowflake_role.this_admin.name]
     }
     custom_role = {
-      privileges       = ["USAGE", "MODIFY"]
+      warehouse_grants = ["USAGE", "MODIFY"]
       granted_to_roles = [snowflake_role.this_dev.name]
     }
   }
