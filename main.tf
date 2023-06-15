@@ -15,6 +15,7 @@ resource "snowflake_warehouse" "this" {
   comment = var.comment
 
   warehouse_size = var.warehouse_size
+  warehouse_type = var.warehouse_type
 
   auto_resume         = var.auto_resume
   auto_suspend        = var.auto_suspend
