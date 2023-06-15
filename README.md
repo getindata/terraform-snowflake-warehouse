@@ -107,6 +107,7 @@ _Additional information that should be made public, for ex. how to solve known i
 | <a name="input_tags"></a> [tags](#input\_tags) | Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`).<br>Neither the tag keys nor the tag values will be modified by this module. | `map(string)` | `{}` | no |
 | <a name="input_tenant"></a> [tenant](#input\_tenant) | ID element \_(Rarely used, not included by default)\_. A customer identifier, indicating who this instance of a resource is for | `string` | `null` | no |
 | <a name="input_warehouse_size"></a> [warehouse\_size](#input\_warehouse\_size) | Specifies the size of the virtual warehouse. | `string` | `"X-Small"` | no |
+| <a name="input_warehouse_type"></a> [warehouse\_type](#input\_warehouse\_type) | Specifies the type of the virtual warehouse. | `string` | `"STANDARD"` | no |
 
 ## Modules
 
