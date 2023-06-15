@@ -10,6 +10,16 @@ variable "warehouse_size" {
   default     = "X-Small"
 }
 
+variable "warehouse_type" {
+  description = "Specifies the type of the virtual warehouse."
+  type        = string
+  default     = "STANDARD"
+  validation {
+    condition     = contains(["STANDARD", "SNOWPARK-OPTIMIZED"], var.warehouse_type)
+    error_message = "Invalid warehouse type. Possible values are: \"STANDARD\", \"SNOWPARK-OPTIMIZED\""
+  }
+}
+
 variable "auto_resume" {
   description = "Specifies whether to automatically resume a warehouse when a SQL statement (e.g. query) is submitted to it."
   type        = bool
