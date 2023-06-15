@@ -130,14 +130,14 @@ _Additional information that should be made public, for ex. how to solve known i
 
 | Name | Version |
 |------|---------|
-| <a name="provider_snowflake"></a> [snowflake](#provider\_snowflake) | ~> 0.47 |
+| <a name="provider_snowflake"></a> [snowflake](#provider\_snowflake) | ~> 0.53 |
 
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
-| <a name="requirement_snowflake"></a> [snowflake](#requirement\_snowflake) | ~> 0.47 |
+| <a name="requirement_snowflake"></a> [snowflake](#requirement\_snowflake) | ~> 0.53 |
 
 ## Resources
 
