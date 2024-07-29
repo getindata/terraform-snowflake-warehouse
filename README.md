@@ -23,7 +23,6 @@ Terraform module for Snowflake Warehouse management
 * Can create custom Snowflake Roles with role-to-role, role-to-user assignments
 * Can create a set of default, functional roles to simplify access management:
   * `ADMIN` - full access
-  * `MODIFY` - abillity to modify warehouse
   * `MONITOR` - abillity to monitor warehouse
   * `USAGE` - abillity to use warehouse
 
@@ -56,7 +55,7 @@ module "terraform_snowflake_warehouse" {
 
 ## NOTES
 
-_Additional information that should be made public, for ex. how to solve known issues, additional descriptions/suggestions_
+When upgrading to version `v2.2.x` - all `default_roles` will be recreated using new terraform resources.
 
 ## EXAMPLES
 
@@ -99,14 +98,14 @@ _Additional information that should be made public, for ex. how to solve known i
 | <a name="input_query_acceleration_max_scale_factor"></a> [query\_acceleration\_max\_scale\_factor](#input\_query\_acceleration\_max\_scale\_factor) | Specifies the maximum scale factor for leasing compute resources for query acceleration. The scale factor is used as a multiplier based on warehouse size. | `number` | `null` | no |
 | <a name="input_regex_replace_chars"></a> [regex\_replace\_chars](#input\_regex\_replace\_chars) | Terraform regular expression (regex) string.<br>Characters matching the regex will be removed from the ID elements.<br>If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits. | `string` | `null` | no |
 | <a name="input_resource_monitor"></a> [resource\_monitor](#input\_resource\_monitor) | Specifies the name of a resource monitor that is explicitly assigned to the warehouse. | `string` | `null` | no |
-| <a name="input_roles"></a> [roles](#input\_roles) | Roles created on the warehouse level | <pre>map(object({<br>    enabled              = optional(bool, true)<br>    descriptor_name      = optional(string, "snowflake-role")<br>    comment              = optional(string)<br>    role_ownership_grant = optional(string)<br>    granted_roles        = optional(list(string))<br>    granted_to_roles     = optional(list(string))<br>    granted_to_users     = optional(list(string))<br>    warehouse_grants     = optional(list(string))<br>  }))</pre> | `{}` | no |
-| <a name="input_scaling_policy"></a> [scaling\_policy](#input\_scaling\_policy) | Specifies the policy for automatically starting and shutting down clusters in a multi-cluster warehouse running in Auto-scale mode. | `string` | `null` | no |
+| <a name="input_roles"></a> [roles](#input\_roles) | Account roles created on the warehouse level | <pre>map(object({<br>    enabled              = optional(bool, true)<br>    descriptor_name      = optional(string, "snowflake-role")<br>    comment              = optional(string)<br>    role_ownership_grant = optional(string)<br>    granted_roles        = optional(list(string))<br>    granted_to_roles     = optional(list(string))<br>    granted_to_users     = optional(list(string))<br>    warehouse_grants = optional(object({<br>      all_privileges    = optional(bool)<br>      with_grant_option = optional(bool, false)<br>      privileges        = optional(list(string))<br>    }))<br>  }))</pre> | `{}` | no |
+| <a name="input_scaling_policy"></a> [scaling\_policy](#input\_scaling\_policy) | Specifies the policy for automatically starting and shutting down clusters in a multi-cluster warehouse running in Auto-scale mode. Valid values are `STANDARD` and `ECONOMY`. | `string` | `null` | no |
 | <a name="input_stage"></a> [stage](#input\_stage) | ID element. Usually used to indicate role, e.g. 'prod', 'staging', 'source', 'build', 'test', 'deploy', 'release' | `string` | `null` | no |
 | <a name="input_statement_queued_timeout_in_seconds"></a> [statement\_queued\_timeout\_in\_seconds](#input\_statement\_queued\_timeout\_in\_seconds) | Object parameter that specifies the time, in seconds, a SQL statement (query, DDL, DML, etc.) can be queued on a warehouse before it is canceled by the system. | `number` | `null` | no |
 | <a name="input_statement_timeout_in_seconds"></a> [statement\_timeout\_in\_seconds](#input\_statement\_timeout\_in\_seconds) | Specifies the time, in seconds, after which a running SQL statement (query, DDL, DML, etc.) is canceled by the system | `number` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`).<br>Neither the tag keys nor the tag values will be modified by this module. | `map(string)` | `{}` | no |
 | <a name="input_tenant"></a> [tenant](#input\_tenant) | ID element \_(Rarely used, not included by default)\_. A customer identifier, indicating who this instance of a resource is for | `string` | `null` | no |
-| <a name="input_warehouse_size"></a> [warehouse\_size](#input\_warehouse\_size) | Specifies the size of the virtual warehouse. | `string` | `"X-Small"` | no |
+| <a name="input_warehouse_size"></a> [warehouse\_size](#input\_warehouse\_size) | Specifies the size of the virtual warehouse. Possible values are: XSMALL, X-SMALL, SMALL, MEDIUM, LARGE, XLARGE, X-LARGE, XXLARGE, X2LARGE, 2X-LARGE, XXXLARGE, X3LARGE, 3X-LARGE, X4LARGE, 4X-LARGE, X5LARGE, 5X-LARGE, X6LARGE, 6X-LARGE. | `string` | `"X-Small"` | no |
 | <a name="input_warehouse_type"></a> [warehouse\_type](#input\_warehouse\_type) | Specifies the type of the virtual warehouse. | `string` | `"STANDARD"` | no |
 
 ## Modules
@@ -114,8 +113,8 @@ _Additional information that should be made public, for ex. how to solve known i
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_roles_deep_merge"></a> [roles\_deep\_merge](#module\_roles\_deep\_merge) | Invicton-Labs/deepmerge/null | 0.1.5 |
-| <a name="module_snowflake_custom_role"></a> [snowflake\_custom\_role](#module\_snowflake\_custom\_role) | getindata/role/snowflake | 1.0.3 |
-| <a name="module_snowflake_default_role"></a> [snowflake\_default\_role](#module\_snowflake\_default\_role) | getindata/role/snowflake | 1.0.3 |
+| <a name="module_snowflake_custom_role"></a> [snowflake\_custom\_role](#module\_snowflake\_custom\_role) | getindata/role/snowflake | 2.1.0 |
+| <a name="module_snowflake_default_role"></a> [snowflake\_default\_role](#module\_snowflake\_default\_role) | getindata/role/snowflake | 2.1.0 |
 | <a name="module_this"></a> [this](#module\_this) | cloudposse/label/null | 0.25.0 |
 | <a name="module_warehouse_label"></a> [warehouse\_label](#module\_warehouse\_label) | cloudposse/label/null | 0.25.0 |
 
@@ -130,21 +129,20 @@ _Additional information that should be made public, for ex. how to solve known i
 
 | Name | Version |
 |------|---------|
-| <a name="provider_snowflake"></a> [snowflake](#provider\_snowflake) | ~> 0.53 |
+| <a name="provider_snowflake"></a> [snowflake](#provider\_snowflake) | ~> 0.94 |
 
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
-| <a name="requirement_snowflake"></a> [snowflake](#requirement\_snowflake) | ~> 0.53 |
+| <a name="requirement_snowflake"></a> [snowflake](#requirement\_snowflake) | ~> 0.94 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
 | [snowflake_warehouse.this](https://registry.terraform.io/providers/Snowflake-Labs/snowflake/latest/docs/resources/warehouse) | resource |
-| [snowflake_warehouse_grant.this](https://registry.terraform.io/providers/Snowflake-Labs/snowflake/latest/docs/resources/warehouse_grant) | resource |
 <!-- END_TF_DOCS -->
 
 ## CONTRIBUTING

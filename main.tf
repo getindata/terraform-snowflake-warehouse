@@ -40,7 +40,8 @@ module "snowflake_default_role" {
   for_each = local.default_roles
 
   source  = "getindata/role/snowflake"
-  version = "1.0.3"
+  version = "2.1.0"
+
   context = module.this.context
 
   name            = each.key
@@ -52,13 +53,27 @@ module "snowflake_default_role" {
   granted_to_users     = lookup(each.value, "granted_to_users", [])
   granted_to_roles     = lookup(each.value, "granted_to_roles", [])
   granted_roles        = lookup(each.value, "granted_roles", [])
+
+  account_objects_grants = {
+    WAREHOUSE = [{
+      all_privileges    = each.value.warehouse_grants.all_privileges
+      privileges        = each.value.warehouse_grants.privileges
+      with_grant_option = each.value.warehouse_grants.with_grant_option
+      object_name       = one(snowflake_warehouse.this[*].name)
+    }]
+  }
+
+  depends_on = [
+    snowflake_warehouse.this
+  ]
 }
 
 module "snowflake_custom_role" {
   for_each = local.custom_roles
 
   source  = "getindata/role/snowflake"
-  version = "1.0.3"
+  version = "2.1.0"
+
   context = module.this.context
 
   name            = each.key
@@ -70,19 +85,17 @@ module "snowflake_custom_role" {
   granted_to_users     = lookup(each.value, "granted_to_users", [])
   granted_to_roles     = lookup(each.value, "granted_to_roles", [])
   granted_roles        = lookup(each.value, "granted_roles", [])
-}
 
-resource "snowflake_warehouse_grant" "this" {
-  for_each = local.enabled ? transpose({ for role_name, role in local.roles : local.roles[role_name].name =>
-    lookup(local.roles_definition[role_name], "warehouse_grants", [])
-    if lookup(local.roles_definition[role_name], "enabled", true)
-  }) : {}
-  warehouse_name = one(resource.snowflake_warehouse.this[*]).name
-  privilege      = each.key
-  roles          = each.value
+  account_objects_grants = {
+    WAREHOUSE = [{
+      all_privileges    = each.value.warehouse_grants.all_privileges
+      privileges        = each.value.warehouse_grants.privileges
+      with_grant_option = each.value.warehouse_grants.with_grant_option
+      object_name       = one(snowflake_warehouse.this[*].name)
+    }]
+  }
 
-  # Whole configuration should be maintained "as Code" so below
-  # options should be disabled in all use-cases
-  enable_multiple_grants = false
-  with_grant_option      = false
+  depends_on = [
+    snowflake_warehouse.this
+  ]
 }

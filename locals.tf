@@ -8,13 +8,25 @@ locals {
 
   default_roles_definition = {
     usage = {
-      warehouse_grants = ["USAGE", "OPERATE"]
+      warehouse_grants = {
+        all_privileges    = null
+        privileges        = ["USAGE", "OPERATE"]
+        with_grant_option = false
+      }
     }
     monitor = {
-      warehouse_grants = ["MONITOR"]
+      warehouse_grants = {
+        privileges        = ["MONITOR"]
+        all_privileges    = null
+        with_grant_option = false
+      }
     }
     admin = {
-      warehouse_grants = ["MODIFY", "MONITOR", "USAGE", "OPERATE", "OWNERSHIP"]
+      warehouse_grants = {
+        all_privileges    = true
+        privileges        = null
+        with_grant_option = false
+      }
     }
   }
 
