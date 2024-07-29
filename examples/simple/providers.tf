@@ -1,3 +1,0 @@
-provider "snowflake" {
-  # Configuration options
-}

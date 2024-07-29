@@ -5,7 +5,7 @@ variable "comment" {
 }
 
 variable "warehouse_size" {
-  description = "Specifies the size of the virtual warehouse."
+  description = "Specifies the size of the virtual warehouse. Possible values are: XSMALL, X-SMALL, SMALL, MEDIUM, LARGE, XLARGE, X-LARGE, XXLARGE, X2LARGE, 2X-LARGE, XXXLARGE, X3LARGE, 3X-LARGE, X4LARGE, 4X-LARGE, X5LARGE, 5X-LARGE, X6LARGE, 6X-LARGE."
   type        = string
   default     = "X-Small"
 }
@@ -51,7 +51,7 @@ variable "max_cluster_count" {
 }
 
 variable "scaling_policy" {
-  description = "Specifies the policy for automatically starting and shutting down clusters in a multi-cluster warehouse running in Auto-scale mode."
+  description = "Specifies the policy for automatically starting and shutting down clusters in a multi-cluster warehouse running in Auto-scale mode. Valid values are `STANDARD` and `ECONOMY`."
   type        = string
   default     = null
 }
@@ -93,7 +93,7 @@ variable "resource_monitor" {
 }
 
 variable "roles" {
-  description = "Roles created on the warehouse level"
+  description = "Account roles created on the warehouse level"
   type = map(object({
     enabled              = optional(bool, true)
     descriptor_name      = optional(string, "snowflake-role")
@@ -102,7 +102,11 @@ variable "roles" {
     granted_roles        = optional(list(string))
     granted_to_roles     = optional(list(string))
     granted_to_users     = optional(list(string))
-    warehouse_grants     = optional(list(string))
+    warehouse_grants = optional(object({
+      all_privileges    = optional(bool)
+      with_grant_option = optional(bool, false)
+      privileges        = optional(list(string))
+    }))
   }))
   default = {}
 }

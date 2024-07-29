@@ -1,9 +1,9 @@
-resource "snowflake_role" "this_admin" {
+resource "snowflake_account_role" "this_admin" {
   name    = "WAREHOUSE_ADMIN"
   comment = "Role for Snowflake Administrators"
 }
 
-resource "snowflake_role" "this_dev" {
+resource "snowflake_account_role" "this_dev" {
   name    = "WAREHOUSE_DEV"
   comment = "Role for Snowflake Developers"
 }
@@ -59,11 +59,19 @@ module "terraform_snowflake_warehouse" {
 
   roles = {
     admin = {
-      granted_to_roles = [snowflake_role.this_admin.name]
+      granted_to_roles = [snowflake_account_role.this_admin.name]
     }
     custom_role = {
-      warehouse_grants = ["USAGE", "MODIFY"]
-      granted_to_roles = [snowflake_role.this_dev.name]
+      warehouse_grants = {
+        privileges = ["USAGE", "MODIFY"]
+      }
+      granted_to_roles = [snowflake_account_role.this_dev.name]
     }
   }
+
+  depends_on = [
+    snowflake_account_role.this_admin,
+    snowflake_account_role.this_dev,
+    snowflake_resource_monitor.this
+  ]
 }
