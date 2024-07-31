@@ -78,7 +78,7 @@ module "snowflake_custom_role" {
 
   name            = each.key
   attributes      = ["WHS", one(snowflake_warehouse.this[*].name)]
-  enabled         = local.create_default_roles && lookup(each.value, "enabled", true)
+  enabled         = lookup(each.value, "enabled", true)
   descriptor_name = lookup(each.value, "descriptor_name", "snowflake-role")
 
   role_ownership_grant = lookup(each.value, "role_ownership_grant", "SYSADMIN")
