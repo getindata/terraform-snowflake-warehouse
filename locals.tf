@@ -1,27 +1,37 @@
 locals {
-  name_from_descriptor = module.warehouse_label.enabled ? trim(replace(
-    lookup(module.warehouse_label.descriptors, var.descriptor_name, module.warehouse_label.id), "/${module.warehouse_label.delimiter}${module.warehouse_label.delimiter}+/", module.warehouse_label.delimiter
-  ), module.warehouse_label.delimiter) : null
+  context_template = lookup(var.context_templates, var.name_scheme.context_template_name, null)
 
-  enabled              = module.this.enabled
-  create_default_roles = local.enabled && var.create_default_roles
+  default_role_naming_scheme = {
+    properties            = ["prefix", "environment", "warehouse", "name"]
+    context_template_name = "snowflake-warehouse-role"
+    extra_values = {
+      prefix    = "whs"
+      warehouse = var.name
+    }
+  }
 
   default_roles_definition = {
     usage = {
+      comment       = null
+      granted_roles = []
       warehouse_grants = {
         all_privileges    = null
         privileges        = ["USAGE", "OPERATE"]
         with_grant_option = false
       }
-    }
+    },
     monitor = {
+      comment       = null
+      granted_roles = []
       warehouse_grants = {
         privileges        = ["MONITOR"]
         all_privileges    = null
         with_grant_option = false
       }
-    }
+    },
     admin = {
+      comment       = null
+      granted_roles = []
       warehouse_grants = {
         all_privileges    = true
         privileges        = null
@@ -38,7 +48,7 @@ locals {
 
   default_roles = {
     for role_name, role in local.roles_definition : role_name => role
-    if contains(keys(local.default_roles_definition), role_name)
+    if contains(keys(local.default_roles_definition), role_name) && var.create_default_roles
   }
   custom_roles = {
     for role_name, role in local.roles_definition : role_name => role
@@ -50,7 +60,7 @@ locals {
       module.snowflake_default_role,
       module.snowflake_custom_role
     ) : role_name => role
-    if role.name != null
+    if role_name != null
   }
 }
 

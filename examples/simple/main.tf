@@ -1,8 +1,9 @@
-module "terraform_snowflake_warehouse" {
-  source  = "../../"
-  context = module.this.context
+/*
+* # Simple example for Snowflake Warehouse module
+*/
 
-  enabled = true
+module "terraform_snowflake_warehouse" {
+  source = "../../"
 
   name = "minimal_warehouse"
 }

@@ -1,3 +1,7 @@
+/*
+* # Complete example for Snowflake Warehouse module
+*/
+
 resource "snowflake_account_role" "this_admin" {
   name    = "WAREHOUSE_ADMIN"
   comment = "Role for Snowflake Administrators"
@@ -13,29 +17,15 @@ resource "snowflake_resource_monitor" "this" {
   credit_quota = 20
 
   notify_triggers = [50, 100]
-
-  set_for_account = false
 }
 
-module "terraform_snowflake_warehouse" {
-  source  = "../../"
-  context = module.this.context
-
-  descriptor_formats = {
-    snowflake-role = {
-      labels = ["attributes", "name"]
-      format = "%v_%v"
-    }
-    snowflake-warehouse = {
-      labels = ["name"]
-      format = "%v"
-    }
-  }
-
-  enabled = true
+module "terraform_snowflake_warehouse_1" {
+  source = "../../"
 
   name    = "full_warehouse"
   comment = "My Warehouse"
+
+  context_templates = var.context_templates
 
   warehouse_size = "x-small"
 
@@ -68,10 +58,35 @@ module "terraform_snowflake_warehouse" {
       granted_to_roles = [snowflake_account_role.this_dev.name]
     }
   }
+}
 
-  depends_on = [
-    snowflake_account_role.this_admin,
-    snowflake_account_role.this_dev,
-    snowflake_resource_monitor.this
-  ]
+module "terraform_snowflake_warehouse_2" {
+  source = "../../"
+
+  name = "sample_warehouse_2"
+  name_scheme = {
+    context_template_name = "snowflake-project-warehouse"
+    extra_values = {
+      project = "project"
+    }
+  }
+  context_templates = var.context_templates
+
+  create_default_roles = true
+}
+
+
+module "terraform_snowflake_warehouse_3" {
+  source = "../../"
+
+  name = "sample_warehouse_3"
+  name_scheme = {
+    properties = ["prefix", "project", "name"]
+    extra_values = {
+      prefix  = "custom"
+      project = "project"
+    }
+  }
+
+  create_default_roles = false
 }
