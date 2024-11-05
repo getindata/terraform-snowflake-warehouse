@@ -81,7 +81,7 @@ module "snowflake_custom_role" {
   name = each.key
   name_scheme = merge(
     local.default_role_naming_scheme,
-    lookup(each.value, "naming_scheme", {})
+    lookup(each.value, "name_scheme", {})
   )
 
   role_ownership_grant = lookup(each.value, "role_ownership_grant", "SYSADMIN")

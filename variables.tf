@@ -106,7 +106,7 @@ variable "roles" {
       context_template_name = optional(string)
       replace_chars_regex   = optional(string)
       extra_labels          = optional(map(string))
-    }), {})
+    }))
     comment              = optional(string)
     role_ownership_grant = optional(string)
     granted_roles        = optional(list(string))
