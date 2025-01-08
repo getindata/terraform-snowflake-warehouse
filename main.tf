@@ -12,7 +12,7 @@ data "context_label" "this" {
 }
 
 resource "snowflake_warehouse" "this" {
-  name    = data.context_label.this.rendered
+  name    = var.name_scheme.uppercase ? upper(data.context_label.this.rendered) : data.context_label.this.rendered
   comment = var.comment
 
   warehouse_size = var.warehouse_size
@@ -45,7 +45,7 @@ module "snowflake_default_role" {
   for_each = local.default_roles #{ for role_name, role in local.default_roles : role_name => role if var.create_default_roles }
 
   source  = "getindata/role/snowflake"
-  version = "3.0.0"
+  version = "3.1.0"
 
   context_templates = var.context_templates
 
@@ -74,7 +74,7 @@ module "snowflake_custom_role" {
   for_each = local.custom_roles
 
   source  = "getindata/role/snowflake"
-  version = "3.0.0"
+  version = "3.1.0"
 
   context_templates = var.context_templates
 

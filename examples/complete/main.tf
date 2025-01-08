@@ -69,6 +69,7 @@ module "terraform_snowflake_warehouse_2" {
     extra_values = {
       project = "project"
     }
+    uppercase = false
   }
   context_templates = var.context_templates
 

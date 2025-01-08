@@ -8,6 +8,7 @@ locals {
       prefix    = "whs"
       warehouse = var.name
     }
+    uppercase = var.name_scheme.uppercase
   }
 
   default_roles_definition = {
