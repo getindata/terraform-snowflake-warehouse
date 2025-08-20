@@ -43,7 +43,7 @@
 
 | Name | Type |
 |------|------|
-| [snowflake_account_role.this_admin](https://registry.terraform.io/providers/Snowflake-Labs/snowflake/latest/docs/resources/account_role) | resource |
-| [snowflake_account_role.this_dev](https://registry.terraform.io/providers/Snowflake-Labs/snowflake/latest/docs/resources/account_role) | resource |
-| [snowflake_resource_monitor.this](https://registry.terraform.io/providers/Snowflake-Labs/snowflake/latest/docs/resources/resource_monitor) | resource |
+| [snowflake_account_role.this_admin](https://registry.terraform.io/providers/snowflakedb/snowflake/latest/docs/resources/account_role) | resource |
+| [snowflake_account_role.this_dev](https://registry.terraform.io/providers/snowflakedb/snowflake/latest/docs/resources/account_role) | resource |
+| [snowflake_resource_monitor.this](https://registry.terraform.io/providers/snowflakedb/snowflake/latest/docs/resources/resource_monitor) | resource |
 <!-- END_TF_DOCS -->
