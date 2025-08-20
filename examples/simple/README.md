@@ -28,6 +28,8 @@ No providers.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
+| <a name="requirement_context"></a> [context](#requirement\_context) | >=0.4.0 |
+| <a name="requirement_snowflake"></a> [snowflake](#requirement\_snowflake) | >= 0.95 |
 
 ## Resources
 

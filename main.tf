@@ -45,7 +45,7 @@ module "snowflake_default_role" {
   for_each = local.default_roles #{ for role_name, role in local.default_roles : role_name => role if var.create_default_roles }
 
   source  = "getindata/role/snowflake"
-  version = "3.1.0"
+  version = "4.0.0"
 
   context_templates = var.context_templates
 
@@ -74,7 +74,7 @@ module "snowflake_custom_role" {
   for_each = local.custom_roles
 
   source  = "getindata/role/snowflake"
-  version = "3.1.0"
+  version = "4.0.0"
 
   context_templates = var.context_templates
 
