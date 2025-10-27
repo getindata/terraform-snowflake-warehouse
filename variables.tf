@@ -26,7 +26,7 @@ variable "warehouse_type" {
 }
 
 variable "generation" {
-  description = "Specifies the generation for the warehouse. Only available for standard warehouses. Valid values are (case-insensitive): 1, 2."
+  description = "Specifies the generation for the warehouse. Only available for standard warehouses. Valid values are: 1, 2, docs: <https://docs.snowflake.com/en/user-guide/warehouses-gen2>."
   type        = string
   default     = null
   validation {
