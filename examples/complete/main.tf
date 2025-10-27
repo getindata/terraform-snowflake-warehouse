@@ -89,5 +89,7 @@ module "terraform_snowflake_warehouse_3" {
     }
   }
 
+  generation = "2"
+
   create_default_roles = false
 }
