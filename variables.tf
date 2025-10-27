@@ -25,6 +25,16 @@ variable "warehouse_type" {
   }
 }
 
+variable "generation" {
+  description = "Specifies the generation for the warehouse. Only available for standard warehouses. Valid values are (case-insensitive): 1, 2."
+  type        = string
+  default     = null
+  validation {
+    condition     = var.generation == null ? true : contains(["1", "2"], var.generation)
+    error_message = "Invalid generation. Possible values are: \"1\", \"2\""
+  }
+}
+
 variable "auto_resume" {
   description = "Specifies whether to automatically resume a warehouse when a SQL statement (e.g. query) is submitted to it."
   type        = bool

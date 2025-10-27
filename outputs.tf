@@ -6,6 +6,7 @@ output "warehouse" {
     comment                             = snowflake_warehouse.this.comment
     warehouse_type                      = snowflake_warehouse.this.warehouse_type
     warehouse_size                      = snowflake_warehouse.this.warehouse_size
+    generation                          = snowflake_warehouse.this.generation
     auto_resume                         = snowflake_warehouse.this.auto_resume
     auto_suspend                        = snowflake_warehouse.this.auto_suspend
     initially_suspended                 = snowflake_warehouse.this.initially_suspended

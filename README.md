@@ -115,6 +115,7 @@ List od code and variable (API) changes:
 | <a name="input_context_templates"></a> [context\_templates](#input\_context\_templates) | Map of context templates used for naming conventions - this variable supersedes `naming_scheme.properties` and `naming_scheme.delimiter` configuration | `map(string)` | `{}` | no |
 | <a name="input_create_default_roles"></a> [create\_default\_roles](#input\_create\_default\_roles) | Whether the default roles should be created | `bool` | `false` | no |
 | <a name="input_enable_query_acceleration"></a> [enable\_query\_acceleration](#input\_enable\_query\_acceleration) | Specifies whether to enable the query acceleration service for queries that rely on this warehouse for compute resources. | `bool` | `true` | no |
+| <a name="input_generation"></a> [generation](#input\_generation) | Specifies the generation for the warehouse. Only available for standard warehouses. Valid values are (case-insensitive): 1, 2. | `string` | `null` | no |
 | <a name="input_initially_suspended"></a> [initially\_suspended](#input\_initially\_suspended) | Specifies whether the warehouse is created initially in the ‘Suspended’ state. | `bool` | `true` | no |
 | <a name="input_max_cluster_count"></a> [max\_cluster\_count](#input\_max\_cluster\_count) | Specifies the maximum number of server clusters for the warehouse. | `number` | `1` | no |
 | <a name="input_max_concurrency_level"></a> [max\_concurrency\_level](#input\_max\_concurrency\_level) | Object parameter that specifies the concurrency level for SQL statements (i.e. queries and DML) executed by a warehouse. | `number` | `null` | no |
@@ -150,7 +151,7 @@ List od code and variable (API) changes:
 | Name | Version |
 |------|---------|
 | <a name="provider_context"></a> [context](#provider\_context) | >=0.4.0 |
-| <a name="provider_snowflake"></a> [snowflake](#provider\_snowflake) | >= 0.95 |
+| <a name="provider_snowflake"></a> [snowflake](#provider\_snowflake) | >= 2.7 |
 
 ## Requirements
 
@@ -158,7 +159,7 @@ List od code and variable (API) changes:
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
 | <a name="requirement_context"></a> [context](#requirement\_context) | >=0.4.0 |
-| <a name="requirement_snowflake"></a> [snowflake](#requirement\_snowflake) | >= 0.95 |
+| <a name="requirement_snowflake"></a> [snowflake](#requirement\_snowflake) | >= 2.7 |
 
 ## Resources
 
